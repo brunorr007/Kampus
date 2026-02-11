@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rolês | Kampus.</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="logo text-pink-500">ROLÊS</div>
+        <button class="btn-icon-glass">
+            <i data-feather="filter"></i>
+        </button>
+    </header>
+
+    <div class="h-[80px]"></div>
+
+    <main class="container pb-24 animate-fade-in">
+        <!-- Lista de Eventos via Firebase -->
+        <div id="eventos-feed" class="space-y-4">
+            <div class="text-center py-10">
+                <i data-feather="loader" class="animate-spin mb-4 w-8 h-8 mx-auto text-gray-500"></i>
+            </div>
+        </div>
+    </main>
+
+    </main>
+
+    <!-- FAB Adicionar (Restaurado) -->
+    <button onclick="abrirModalEvento()"
+        class="fixed bottom-[90px] right-6 w-14 h-14 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(236,72,153,0.5)] z-40 text-white animate-bounce hover:scale-110 transition duration-300">
+        <i data-feather="plus"></i>
+    </button>
+
+    <!-- Modal Novo Rolê -->
+    <div id="modal-novo-evento" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop Blur -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="fecharModalEvento()"></div>
+
+        <!-- Conteúdo -->
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-[#1e1e1e] rounded-t-3xl p-6 shadow-2xl animate-slide-up border-t border-purple-500/30">
+            <div class="w-12 h-1 bg-gray-700 rounded-full mx-auto mb-6"></div>
+
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i data-feather="plus-circle" class="text-pink-500"></i> Criar Novo Rolê
+            </h2>
+
+            <form id="form-evento" onsubmit="salvarEvento(event)" class="space-y-4">
+                <div>
+                    <label class="text-xs text-gray-400 uppercase font-bold">Título do Rolê</label>
+                    <input type="text" id="evt-titulo" required
+                        class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 text-white focus:border-pink-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-gray-400 uppercase font-bold">Data</label>
+                        <input type="date" id="evt-data" required
+                            class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 text-white focus:border-pink-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 uppercase font-bold">Hora</label>
+                        <input type="time" id="evt-hora" required
+                            class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 text-white focus:border-pink-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs text-gray-400 uppercase font-bold">Local</label>
+                    <div class="relative">
+                        <i data-feather="map-pin" class="absolute left-3 top-3 text-gray-500 w-4 h-4"></i>
+                        <input type="text" id="evt-local" required
+                            class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 pl-10 text-white focus:border-pink-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs text-gray-400 uppercase font-bold">Foto de Capa (URL)</label>
+                    <input type="url" id="evt-foto" placeholder="https://..."
+                        class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 text-white focus:border-pink-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="text-xs text-gray-400 uppercase font-bold">Descrição</label>
+                    <textarea id="evt-desc" rows="3"
+                        class="w-full bg-black/30 border border-gray-700 rounded-lg p-3 text-white focus:border-pink-500 outline-none"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-pink-600 to-purple-600 py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-pink-500/20 transition">
+                    Publicar Rolê 🚀
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i data-feather="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="estudos.html" class="nav-item">
+            <i data-feather="book"></i>
+            <span>Estudos</span>
+        </a>
+        <a href="market.html" class="nav-item">
+            <i data-feather="shopping-bag"></i>
+            <span>Market</span>
+        </a>
+        <a href="eventos.html" class="nav-item active">
+            <i data-feather="calendar"></i>
+            <span>Rolês</span>
+        </a>
+        <a href="forum.html" class="nav-item">
+            <i data-feather="user"></i>
+            <span>Perfil</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

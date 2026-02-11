@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+    /* Paleta Luxury (Deep Space & Amethyst) */
+    --bg-dark: #030304;
+    --surface: #0a0a0c;
+
+    /* Acentos Sutis */
+    --primary: #9d4edd;
+    /* Amethyst */
+    --primary-dim: rgba(157, 78, 221, 0.15);
+    --secondary: #4ea8de;
+    /* Steel Blue */
+    --accent-glow: rgba(157, 78, 221, 0.4);
+
+    --text-main: #f8f9fa;
+    --text-muted: #8b8d98;
+
+    /* Glassmorphism Refinado */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.04);
+    --glass-blur: blur(30px);
+
+    /* Dimensões */
+    --nav-height: 80px;
+    --radius-lg: 28px;
+    --radius-md: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    padding-bottom: calc(var(--nav-height) + 30px);
+    overflow-x: hidden;
+    min-height: 100vh;
+
+    /* Background Abstrato e Sutil */
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(20, 10, 40, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(10, 30, 50, 0.4) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+/* Tipografia Elegante */
+h1,
+h2,
+h3 {
+    font-weight: 400;
+    /* Leveza = Elegância */
+    letter-spacing: -0.02em;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    /* Toque editorial */
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to bottom right, #fff, #a5a5a5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-subtitle::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--primary);
+    margin: 8px auto 0;
+    opacity: 0.5;
+}
+
+/* UTILS */
+.container {
+    padding: 0 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* HEADER MINIMALISTA */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: white;
+}
+
+.btn-icon-glass {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    border: var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.btn-icon-glass:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: rotate(90deg);
+}
+
+/* CARDS LUXURY */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Botões Refinados */
+button,
+.btn-action {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* BOTTOM NAV FLUTUANTE (FROSTED) */
+.bottom-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 0 2rem;
+    height: 70px;
+    background: rgba(15, 15, 18, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    z-index: 100;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.nav-item {
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+    position: relative;
+    padding: 10px;
+}
+
+.nav-item i {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.5;
+    transition: 0.4s;
+}
+
+.nav-item span {
+    display: none;
+}
+
+/* Ícones apenas para minimalismo */
+
+.nav-item.active {
+    color: white;
+}
+
+.nav-item.active i {
+    transform: scale(1.2);
+    stroke: var(--primary);
+    filter: drop-shadow(0 0 10px var(--primary-dim));
+}
+
+/* Ponto indicador sutil */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* INPUTS MINIMALISTAS */
+.search-container {
+    position: relative;
+    z-index: 40;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    padding: 1rem 0;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 300;
+    transition: 0.4s;
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* ANIMAÇÕES SUAVES */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+/* FAB (Floating Action Button) */
+button[class*="fixed"] {
+    border-radius: 30px;
+    /* Squircle */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+button[class*="fixed"]:hover {
+    transform: scale(1.05) rotate(90deg);
+}
+
+/* Scrollbar invisivel */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* Empty States */
+.empty-state {
+    opacity: 0.5;
+    font-weight: 300;
+}

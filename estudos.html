@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Estudos | Kampus.</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="logo">ESTUDOS</div>
+        <button class="btn-icon-glass">
+            <i data-feather="filter"></i>
+        </button>
+    </header>
+
+    <!-- Espaçamento para Header Absolute -->
+    <div class="h-[80px]"></div>
+
+    <!-- Filtros e Busca -->
+    <div class="px-6 mt-4 space-y-4 animate-fade-in">
+        <!-- Busca -->
+        <div class="relative">
+            <i data-feather="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+            <input type="text" id="busca-estudos" oninput="filtrarEstudos()"
+                class="w-full bg-[#1e1e1e] border border-gray-800 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition"
+                placeholder="Matéria, professor ou ano...">
+        </div>
+
+        <!-- Filtros (Selects) -->
+        <div class="flex gap-2 text-sm overflow-x-auto pb-2 no-scrollbar">
+            <select id="filtro-materia" onchange="filtrarEstudos()"
+                class="bg-[#1e1e1e] border border-gray-800 text-gray-300 rounded-lg px-3 py-2 focus:border-purple-500 outline-none">
+                <option value="">Todas Matérias</option>
+                <!-- Preenchido via JS -->
+            </select>
+            <select id="filtro-tipo" onchange="filtrarEstudos()"
+                class="bg-[#1e1e1e] border border-gray-800 text-gray-300 rounded-lg px-3 py-2 focus:border-purple-500 outline-none">
+                <option value="">Todos Tipos</option>
+                <option value="resumo">Resumo</option>
+                <option value="prova">Prova</option>
+                <option value="trabalho">Trabalho</option>
+            </select>
+        </div>
+
+        <!-- Botão Contribuir -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNC_ALGFvTIvyxHIUaKPEX7LlHd36zivOWtyJR626sFqoSwg/viewform?usp=publish-editor"
+            target="_blank"
+            class="block w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 rounded-xl text-center shadow-lg hover:shadow-purple-500/20 transition transform active:scale-95">
+            <i data-feather="upload-cloud" class="w-4 h-4 inline mr-2"></i>
+            Enviar Material / Prova
+        </a>
+    </div>
+
+    <main class="container mt-2 pb-24 animate-fade-in" style="animation-delay: 0.1s;">
+        <!-- JS preenche esta lista com dados.json -->
+        <div id="lista-estudos">
+            <!-- Empty state default -->
+            <div class="empty-state text-center mt-10">
+                <i data-feather="loader" class="animate-spin mb-4 w-12 h-12 mx-auto"></i>
+                <p class="text-gray-400">Sincronizando biblioteca...</p>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i data-feather="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="estudos.html" class="nav-item active">
+            <i data-feather="book"></i>
+            <span>Estudos</span>
+        </a>
+        <a href="market.html" class="nav-item">
+            <i data-feather="shopping-bag"></i>
+            <span>Market</span>
+        </a>
+        <a href="eventos.html" class="nav-item">
+            <i data-feather="calendar"></i>
+            <span>Rolês</span>
+        </a>
+        <a href="forum.html" class="nav-item">
+            <i data-feather="user"></i>
+            <span>Perfil</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
